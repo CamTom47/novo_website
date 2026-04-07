@@ -1,0 +1,31 @@
+@import "tailwindcss";
+@import "https://use.typekit.net/apf3fqi.css";
+
+:root {
+	font-family: "muli", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+h1,
+h2,
+h3 {
+	font-family: "muli", sans-serif;
+	font-weight: 700;
+	font-style: normal;
+}
+
+
+
+button {
+	font-family: cheap-pine, sans-serif;
+	font-style: normal;
+	font-weight: 400;
+}
+
+@theme {
+	--color-beige: #f2eade;
+	--color-light-gray: #ab9b6a;
+	--color-brown: #422e23;
+	--color-clay: #b27e5b;
+	--color-bronze: #8c6e31;
+};

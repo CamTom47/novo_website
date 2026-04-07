@@ -1,0 +1,29 @@
+{
+  "name": "novo_website",
+  "version": "1.0.0",
+  "description": "backend for novo website",
+  "homepage": "https://github.com/CamTom47/novo_website#readme",
+  "bugs": {
+    "url": "https://github.com/CamTom47/novo_website/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CamTom47/novo_website.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "axios": "^1.14.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.1",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "nodemon": "^3.1.14",
+    "square": "^44.0.1"
+  }
+}
