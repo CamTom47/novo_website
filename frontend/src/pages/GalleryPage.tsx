@@ -27,6 +27,8 @@ const GalleryPage = (): React.JSX.Element => {
 		<img key={idx} src={`/products/${image}`} alt={`${image}`} className='w-auto h-fit' />
 	));
 
-	return <div className='grid grid-cols-3 gap-4 p-12 rows-[200px]'>{imageComponents}</div>;
+	return (
+		<div className='grid grid-cols-1 xl:grid-cols-3 gap-y-2 xl:gap-4 p-2 xl:p-12 rows-[200px]'>{imageComponents}</div>
+	);
 };
 export default GalleryPage;

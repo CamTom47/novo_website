@@ -32,11 +32,11 @@ const ContactPage = (): React.JSX.Element => {
 	/** -------------------------EFFECTS------------------------- **/
 
 	return (
-		<div className='grid grid-cols-2 gap-x-12 h-fit w-full px-100 py-24'>
+		<div className='px-2 grid grid-cols-2 gap-x-12 h-fit w-full xl:px-100 xl:py-24'>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className='flex flex-col gap-y-2 text-brown h-full justify-center items-start'>
-				<div className="w-full">
+				className='col-span-2 flex flex-col gap-y-2 text-brown justify-center items-start xl:col-span-1 fit py-12'>
+				<div className='w-full'>
 					<p className='text-lg font-medium'>Name</p>
 					<div className='w-full flex justify-between gap-x-4'>
 						<div className='flex flex-col w-full gap-y-2 text-xs font-light'>
@@ -55,6 +55,7 @@ const ContactPage = (): React.JSX.Element => {
 								{...register("lastName")}
 								type='text'
 								name='lastName'
+								placeholder='Enter last name'
 								className='border border-brown w-full h-8 py-4 px-1'
 							/>
 						</div>
@@ -64,7 +65,13 @@ const ContactPage = (): React.JSX.Element => {
 					<label htmlFor='email' className='text-lg font-medium'>
 						Email Address <span className='text-xs font-light'>(required)</span>
 					</label>
-					<input {...register("email")} type='text' name='email' className='border border-brown w-full h-8 py-4 px-1' />
+					<input
+						{...register("email")}
+						type='text'
+						name='email'
+						placeholder='Enter email'
+						className='border border-brown w-full h-8 py-4 px-1'
+					/>
 				</div>
 				<div className='flex flex-col  w-full gap-y-2 text-xs font-light'>
 					<label htmlFor='subject' className='text-lg font-medium'>
@@ -74,6 +81,7 @@ const ContactPage = (): React.JSX.Element => {
 						{...register("subject")}
 						type='text'
 						name='subject'
+						placeholder='Enter subject'
 						className='border border-brown w-full h-8 py-4 px-1'
 					/>
 				</div>
@@ -85,10 +93,11 @@ const ContactPage = (): React.JSX.Element => {
 						{...register("message")}
 						name='message'
 						rows={4}
+						placeholder='Enter message'
 						className='border border-brown w-full py-2 px-1 resize-none '
 					/>
 				</div>
-				<a href='/shop' className='relative h-10 mt-6'>
+				<a href='/shop' className='w-full flex justify-center relative h-10 mt-6 xl:justify-startL'>
 					<img src='/assets/button_brown.svg' alt='Novo Shop Link' className='w-full h-full' />
 					<button
 						type='button'
@@ -98,7 +107,7 @@ const ContactPage = (): React.JSX.Element => {
 					</button>
 				</a>{" "}
 			</form>
-			<img src='/products/novo-ceramics-product-photos-32.jpg' alt='Ceramics example' />
+			<img src='/products/novo-ceramics-product-photos-32.jpg' alt='Ceramics example' className='hidden xl:visible' />
 		</div>
 	);
 };

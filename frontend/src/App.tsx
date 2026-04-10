@@ -25,7 +25,7 @@ const App = (): React.JSX.Element => {
 	/** -------------------------EFFECTS------------------------- **/
 
 	return (
-		<div className='h-svh flex flex-col items-center justify-between'>
+		<div className='h-dvh flex flex-col items-center '>
 			<Navbar></Navbar>
 			<Routes>
 				<Route path='/' element={<HomePage />} />

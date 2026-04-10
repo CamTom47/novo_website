@@ -14,8 +14,6 @@ h3 {
 	font-style: normal;
 }
 
-
-
 button {
 	font-family: cheap-pine, sans-serif;
 	font-style: normal;
@@ -28,4 +26,41 @@ button {
 	--color-brown: #422e23;
 	--color-clay: #b27e5b;
 	--color-bronze: #8c6e31;
-};
+	--animate-top-span-open: top-span-open 1s ease-in-out;
+	--animate-top-span-close: top-span-close 1s ease-in-out;
+	--animate-bottom-span-open: bottom-span-open 1s ease-in-out;
+	--animate-bottom-span-close: bottom-span-close 1s ease-in-out;
+}
+
+@keyframes top-span-open {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(45deg);
+	}
+}
+@keyframes top-span-close {
+	0%,
+	100% {
+		transform: rotate(0deg);
+	}
+}
+@keyframes bottom-span-open {
+	0% {
+		transform-origin: 100%;
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(-45deg);
+	}
+}
+@keyframes bottom-span-close {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(-45deg);
+	}
+}
+

@@ -15,14 +15,14 @@ const HomePage = (): React.JSX.Element => {
 	/** -------------------------EFFECTS------------------------- **/
 
 	return (
-		<div className='flex flex-col w-full'>
+		<div className='flex flex-col w-full h-fit'>
 			<div className='flex justify-center gap-x-6 pb-20'>
 				<img src='/products/novo-ceramics-product-photos-7.jpg' alt='' className='h-80 w-auto' />
 				<img src='/products/novo-ceramics-product-photos-55.jpg' alt='' className='h-80 w-auto' />
 				<img src='/products/novo-ceramics-product-photos-1.jpg' alt='' className='h-80 w-auto' />
 			</div>
 			<div className='flex justify-center bg-beige'>
-				<div className='flex flex-col gap-y-12 w-1/2 text-center text-light-gray px-12 py-20'>
+				<div className='flex flex-col px-2 gap-y-12 py-20 text-light-gray xl:px-12 xl:w-1/2'>
 					<h1 className='text-5xl font-medium font-muli'>Hello there.</h1>
 					<p className='text-sm'>
 						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque magni temporibus magnam, similique
@@ -35,9 +35,11 @@ const HomePage = (): React.JSX.Element => {
 					</p>
 				</div>
 			</div>
-			<div className='grid grid-cols-2 py-48 px-88 gap-x-36'>
-				<div className='flex flex-col gap-y-10 items-start justify-center'>
-					<h1 className='text-4xl font-semi-bold text-brown'>A new beginning.</h1>
+			<div className='flex flex-col items-center py-20 xl:grid xl:grid-cols-2 xl:py-48 xl:px-88 xl:gap-x-36'>
+				<div className='flex flex-col items-center gap-y-10 px-2 xl:items-start'>
+					<h1 className='w-full text-4xl font-semi-bold text-brown'>A new beginning.</h1>
+					<img src='/products/novo-ceramics-product-photos-66.jpg' alt='' />
+
 					<p className='text-sm'>
 						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque magni temporibus magnam, similique
 						recusandae sed nemo possimus accusantium voluptatibus quisquam vel fugit, quia labore cumque, placeat unde
@@ -57,7 +59,6 @@ const HomePage = (): React.JSX.Element => {
 						</button>
 					</a>
 				</div>
-				<img src='/products/novo-ceramics-product-photos-66.jpg' alt='' />
 			</div>
 		</div>
 	);

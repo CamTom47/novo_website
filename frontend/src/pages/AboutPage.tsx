@@ -21,8 +21,8 @@ const AboutPage = (): React.JSX.Element => {
 	/** -------------------------EFFECTS------------------------- **/
 
 	return (
-		<div className='flex flex-col items-center gap-y-18 w-full px-140 py-24 bg-beige'>
-			<button onClick={testCallProducts}>Test Call</button>
+		<div className='px-2 py-12 flex flex-col items-center gap-y-18 w-full xl:px-140 xl:py-24 bg-beige'>
+			{/* <button onClick={testCallProducts}>Test Call</button> */}
 			<h1 className='text-5xl font-medium text-light-gray'>My name is Frankie</h1>
 			<p className=' text-light-gray'>
 				Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
@@ -31,7 +31,7 @@ const AboutPage = (): React.JSX.Element => {
 				vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et
 				iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
 			</p>
-			<img src='/assets/pots_illustration.svg' alt='Art images of pottery' className='h-auto w-3/8' />
+			<img src='/assets/pots_illustration.svg' alt='Art images of pottery' className='h-auto xl:w-3/8 w-5/8' />
 			<p className='text-light-gray'>
 				Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
 				dolore magna aliquam erat volutpat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
