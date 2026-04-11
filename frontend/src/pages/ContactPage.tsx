@@ -23,11 +23,14 @@ const ContactPage = (): React.JSX.Element => {
 		register,
 		handleSubmit,
 		watch,
-		formState: {},
-	} = useForm<Inputs>();
+		formState: { errors },
+	} = useForm<Inputs>({ mode: "onSubmit" });
 
 	/** -------------------------FUNCTIONS------------------------- **/
-	const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+	const onSubmit: SubmitHandler<Inputs> = (data, e) => {
+		e?.preventDefault();
+		console.log(data);
+	};
 
 	/** -------------------------EFFECTS------------------------- **/
 
@@ -41,22 +44,26 @@ const ContactPage = (): React.JSX.Element => {
 					<div className='w-full flex justify-between gap-x-4'>
 						<div className='flex flex-col w-full gap-y-2 text-xs font-light'>
 							<label htmlFor='firstName'>First Name (required)</label>
+							{errors.firstName?.type === "required" && <p className='text-red-500'>This field is required</p>}
 							<input
-								{...register("firstName")}
+								{...register("firstName", { required: true })}
 								type='text'
 								name='firstName'
 								className='border border-brown w-full h-8 py-4 px-1'
 								placeholder='Enter first name'
+								aria-invalid={errors?.firstName ? "true" : "false"}
 							/>
 						</div>
 						<div className='flex flex-col  w-full gap-y-2 text-xs font-light'>
 							<label htmlFor='lastname'>Last Name (required)</label>
+							{errors.lastName?.type === "required" && <p className='text-red-500'>This field is required</p>}
 							<input
-								{...register("lastName")}
+								{...register("lastName", { required: true })}
 								type='text'
 								name='lastName'
 								placeholder='Enter last name'
 								className='border border-brown w-full h-8 py-4 px-1'
+								aria-invalid={errors?.lastName ? "true" : "false"}
 							/>
 						</div>
 					</div>
@@ -65,42 +72,51 @@ const ContactPage = (): React.JSX.Element => {
 					<label htmlFor='email' className='text-lg font-medium'>
 						Email Address <span className='text-xs font-light'>(required)</span>
 					</label>
+					{errors.email?.type === "required" && <p className='text-red-500'>This field is required</p>}
+					{errors.email?.type === "pattern" && <p className='text-red-500'>Invalid Email</p>}
+
 					<input
-						{...register("email")}
+						{...register("email", { required: true, pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/ })}
 						type='text'
 						name='email'
 						placeholder='Enter email'
 						className='border border-brown w-full h-8 py-4 px-1'
+						aria-invalid={errors?.email ? "true" : "false"}
 					/>
 				</div>
 				<div className='flex flex-col  w-full gap-y-2 text-xs font-light'>
 					<label htmlFor='subject' className='text-lg font-medium'>
 						Subject <span className='text-xs font-light'>(required)</span>
 					</label>
+					{errors.subject?.type === "required" && <p className='text-red-500'>This field is required</p>}
 					<input
-						{...register("subject")}
+						{...register("subject", { required: true })}
 						type='text'
 						name='subject'
 						placeholder='Enter subject'
 						className='border border-brown w-full h-8 py-4 px-1'
+						aria-invalid={errors?.subject ? "true" : "false"}
 					/>
 				</div>
 				<div className='flex flex-col  w-full gap-y-2 text-xs font-light'>
 					<label htmlFor='message' className='text-lg font-medium'>
 						Message <span className='text-xs font-light'>(required)</span>
 					</label>
+					{errors.message?.type === "required" && <p className='text-red-500'>This field is required</p>}
+
 					<textarea
-						{...register("message")}
+						{...register("message", { required: true })}
 						name='message'
-						rows={4}
+						rows={6}
 						placeholder='Enter message'
 						className='border border-brown w-full py-2 px-1 resize-none '
+						aria-invalid={errors?.message ? "true" : "false"}
 					/>
 				</div>
 				<a href='/shop' className='w-full flex justify-center relative h-10 mt-6 xl:justify-startL'>
 					<img src='/assets/button_brown.svg' alt='Novo Shop Link' className='w-full h-full' />
 					<button
-						type='button'
+						type='submit'
 						className='absolute w-full h-full text-lg text-nowrap left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-brown'
 						style={{ fontFamily: "cheap-pine-sans, sans-serif", fontStyle: "normal", fontWeight: 400 }}>
 						SUBMIT

@@ -28,7 +28,7 @@ const Navbar = (): React.JSX.Element => {
 				<img src='/assets/logo_header.png' alt='Novo Header' className='h-24 w-auto' />
 			</a>
 			<div
-				className={`bg-white w-full flex  items-center gap-x-6  font-light text-light-gray xl:w-1/2 justify-center ${!isNavOpen ? "invisible" : ""} xl:gap-x-12`}>
+				className={`bg-white w-full flex items-center gap-x-6  font-light text-light-gray xl:w-1/2 justify-center ${!isNavOpen ? "opacity-0" : "opacity-100"} xl:gap-x-12 duration-500`}>
 				<Link to={"/shop"}>Shop</Link>
 				<Link to={"/about"}>About</Link>
 				<Link to={"/gallery"}>Gallery</Link>
@@ -44,11 +44,14 @@ const Navbar = (): React.JSX.Element => {
 			</Link>
 			<div
 				id='navIcon'
-				className='absolute size-4 top-12 right-12 flex flex-col gap-y-1 xl:hidden [&_span]:bg-brown [&_span]:w-6 [&_span]:h-0.5 [&_span]:rounded'
+				className='absolute w-6 h-4 top-12 left-12 xl:hidden [&_span]:bg-brown [&_span]:w-full [&_span]:h-0.5 [&_span]:rounded [&_span]:origin-center overflow-clip'
 				onClick={toggleIsNavOpen}>
-				<span className='animate-'></span>
-				<span className={`${isNavOpen ? "opacity-0" : ""} inline shrink-0 duration-300`}></span>
-				<span className='animate-bottom-span-open'></span>
+				<div className='relative w-full h-full flex flex-col items-center justify-center gap-y-1'>
+					<span className={`${isNavOpen ? "me-12" : "me-0"} absolute top-0 duration-300`}></span>
+					<span className={`${isNavOpen ? "rotate-45" : "rotate-0"} absolute center duration-500`}></span>
+					<span className={`${isNavOpen ? "-rotate-45" : "rotate-0"} absolute center duration-500`}></span>
+					<span className={`${isNavOpen ? "ms-12" : "ms-0"} absolute bottom-0 duration-300`}></span>
+				</div>
 			</div>
 		</div>
 	);
