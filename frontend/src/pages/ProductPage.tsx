@@ -1,5 +1,5 @@
 /** -------------------------MODULES------------------------- **/
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SquareApi from "../api/SquareApi";
 
@@ -11,14 +11,16 @@ import SquareApi from "../api/SquareApi";
 
 const ProductPage = (): React.JSX.Element => {
 	/** -------------------------STATE------------------------- **/
+	const [product, setProduct] = useState({});
 	const { productId } = useParams();
 
 	/** -------------------------FUNCTIONS------------------------- **/
 
 	const getProductData = async () => {
 		if (productId) {
-			const response = await SquareApi.findAProduct(productId);
-			console.log("response", response);
+			const response: any = await SquareApi.findAProduct(productId);
+			console.log(response);
+			setProduct(response.data);
 		}
 	};
 
@@ -27,29 +29,35 @@ const ProductPage = (): React.JSX.Element => {
 	useEffect(() => {
 		getProductData();
 	}, []);
+
 	return (
-		<div className='grid grid-cols-2 px-100 gap-x-24 justify-center py-24'>
-			<div className='flex flex-col gap-y-4 h-fit'>
-				<div className='h-160 w-full border border-black'></div>
-				<div className='flex justify-between gap-x-2'>
-					<div className='size-24 border border-black'></div>
-					<div className='size-24 border border-black'></div>
-					<div className='size-24 border border-black'></div>
-					<div className='size-24 border border-black'></div>
-				</div>
-			</div>
+		<div className='flex flex-col justify-center mx-2 xl:grid xl:grid-cols-2 xl:px-100 xl:gap-x-24 xl:py-24'>
 			<div className='flex flex-col w-full gap-y-12 justify-center'>
 				<div>
-					<h1 className='text-3xl font-semibold text-brown'>Product Title</h1>
-					<p className='text-xl font-light'>$400</p>
+					{Object.keys(product).length === 0 ? (
+						<h1 className='text-3xl font-semibold text-brown'>oijfdsaoihfd</h1>
+					) : (
+						<div>
+							<img src={product.relatedObjects[0].imageData.url} alt='' />
+							<h1 className='text-3xl font-semibold text-brown'>{product.object.itemData.name}</h1>
+							<p className='text-xl font-light'>${product.object.itemData.variations[0].itemVariationData.priceMoney.amount.split('').toSpliced(product.object.itemData.variations[0].itemVariationData.priceMoney.amount.split('').length - 2, 0, '.').join('')}</p>
+							<p>{product.object.itemData.description}</p>
+						</div>
+					)}
+					<div className='flex flex-col gap-y-4 h-fit'>
+						<div className='h-160 w-full border border-black'></div>
+						<div className='flex justify-between gap-x-2'>
+							<div className='size-24 border border-black'></div>
+							<div className='size-24 border border-black'></div>
+							<div className='size-24 border border-black'></div>
+							<div className='size-24 border border-black'></div>
+						</div>
+					</div>
 				</div>
 				<div>
 					<p>
 						Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
 						dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
-						suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in
-						vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
-						accumsan et iusto odio dignissim qui blandit praesent luptatum zz
 					</p>
 					<br></br>
 					<p>Dimensions (in inches): 12 H x 8 W</p>

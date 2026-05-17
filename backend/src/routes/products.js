@@ -2,7 +2,7 @@ import express from "express";
 import { squareClient } from "../config.js";
 const router = express.Router();
 
-router.post("/", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
 	try {
 		const products = await squareClient.catalog.search({
 			includeRelatedObjects: true,
@@ -14,14 +14,15 @@ router.post("/", async (req, res, next) => {
 		return err;
 	}
 });
-router.post("/images", async (req, res, next) => {
+router.get("/:productId", async (req, res, next) => {
 	try {
-		const images = await squareClient.catalog.search({
+		const productId = req.params.productId;
+		const product = await squareClient.catalog.object.get({
+			objectId: productId,
 			includeRelatedObjects: true,
-			objectTypes: ["IMAGE"],
 		});
-		console.log("images", images);
-		return res.send(images);
+		console.log(product)
+		return res.send(product);
 	} catch (err) {
 		console.error(err);
 		return err;
