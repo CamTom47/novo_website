@@ -30,7 +30,7 @@ const App = (): React.JSX.Element => {
 			<Routes>
 				<Route path='/' element={<HomePage />} />
 				<Route path='/shop' element={<ShopPage />} />
-				<Route path='/shop/:id' element={<ProductPage />} />
+				<Route path='/shop/:productId' element={<ProductPage />} />
 				<Route path='/about' element={<AboutPage />} />
 				<Route path='/gallery' element={<GalleryPage />} />
 				<Route path='/contact' element={<ContactPage />} />

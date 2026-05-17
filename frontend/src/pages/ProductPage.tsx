@@ -1,22 +1,32 @@
 /** -------------------------MODULES------------------------- **/
-import React from "react";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import SquareApi from "../api/SquareApi";
 
 /** -------------------------COMPONENTS------------------------- **/
 
 /** -------------------------STYLES------------------------- **/
 
 /** -------------------------INTERFACES------------------------- **/
-interface ProductPageProps {
-	product: {};
-}
 
-const ProductPage = ({ product }: ProductPageProps): React.JSX.Element => {
+const ProductPage = (): React.JSX.Element => {
 	/** -------------------------STATE------------------------- **/
+	const { productId } = useParams();
 
 	/** -------------------------FUNCTIONS------------------------- **/
 
+	const getProductData = async () => {
+		if (productId) {
+			const response = await SquareApi.findAProduct(productId);
+			console.log("response", response);
+		}
+	};
+
 	/** -------------------------EFFECTS------------------------- **/
 
+	useEffect(() => {
+		getProductData();
+	}, []);
 	return (
 		<div className='grid grid-cols-2 px-100 gap-x-24 justify-center py-24'>
 			<div className='flex flex-col gap-y-4 h-fit'>

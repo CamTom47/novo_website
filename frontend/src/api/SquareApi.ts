@@ -18,7 +18,26 @@ class SquareApi {
 
 	static findAllProducts = async () => {
 		try {
-			const response = await this.request("products", {}, "post");
+			const response = await this.request("products", {}, "get");
+			return response;
+		} catch (err) {
+			console.error(err);
+			return err;
+		}
+	};
+
+	static findAProduct = async (productId: string) => {
+		try {
+			const response = await this.request(`products/${productId}`, {}, "get");
+			return response;
+		} catch (err) {
+			console.error(err);
+			return err;
+		}
+	};
+	static findProductImages = async () => {
+		try {
+			const response = await this.request("products/images", {}, "get");
 			return response;
 		} catch (err) {
 			console.error(err);

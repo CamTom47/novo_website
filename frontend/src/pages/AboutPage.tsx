@@ -13,10 +13,6 @@ const AboutPage = (): React.JSX.Element => {
 
 	/** -------------------------FUNCTIONS------------------------- **/
 
-	const testCallProducts = async () => {
-		const products = await SquareApi.findAllProducts();
-		console.log('products', products)
-	}
 
 	/** -------------------------EFFECTS------------------------- **/
 
