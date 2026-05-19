@@ -13,7 +13,6 @@ const Navbar = (): React.JSX.Element => {
 	const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
 
 	const location = useLocation()
-	console.log('location', location)
 	/** -------------------------FUNCTIONS------------------------- **/
 	const toggleIsNavOpen = () => {
 		setIsNavOpen(!isNavOpen);

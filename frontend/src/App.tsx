@@ -1,6 +1,7 @@
 /** -------------------------MODULES------------------------- **/
-import React from "react";
+import React, { use, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
+import { CartProvider } from "./context/CartContext";
 
 /** -------------------------COMPONENTS------------------------- **/
 import Navbar from "./components/Navbar";
@@ -12,6 +13,8 @@ import GalleryPage from "./pages/GalleryPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Footer from "./components/Footer";
 import ProductPage from "./pages/ProductPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import PaymentPage from "./pages/PaymentPage";
 
 /** -------------------------STYLES------------------------- **/
 
@@ -26,17 +29,20 @@ const App = (): React.JSX.Element => {
 
 	return (
 		<div className='h-dvh flex flex-col justify-start items-center overflow-y-scroll overflow-x-clip'>
-			<Navbar></Navbar>
-			<Routes>
-				<Route path='/' element={<HomePage />} />
-				<Route path='/shop' element={<ShopPage />} />
-				<Route path='/shop/:productId' element={<ProductPage />} />
-				<Route path='/about' element={<AboutPage />} />
-				<Route path='/gallery' element={<GalleryPage />} />
-				<Route path='/contact' element={<ContactPage />} />
-				<Route path='/*' element={<NotFoundPage />} />
-			</Routes>
-			<Footer></Footer>
+			<CartProvider>
+				<Navbar></Navbar>
+				<Routes>
+					<Route path='/' element={<HomePage />} />
+					<Route path='/shop' element={<ShopPage />} />
+					<Route path='/shop/:productId' element={<ProductPage />} />
+					<Route path='/about' element={<AboutPage />} />
+					<Route path='/gallery' element={<GalleryPage />} />
+					<Route path='/checkout' element={<CheckoutPage />} />
+					<Route path='/checkout/payment' element={<PaymentPage />} />
+					<Route path='/*' element={<NotFoundPage />} />
+				</Routes>
+				<Footer></Footer>
+			</CartProvider>
 		</div>
 	);
 };

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SquareApi from "../api/SquareApi";
 import ImageToggler from "../components/ImageToggler";
+import { useCart } from "../context/CartContext";
 
 /** -------------------------COMPONENTS------------------------- **/
 
@@ -17,6 +18,7 @@ const ProductPage = (): React.JSX.Element => {
 	const [activeImage, setActiveImage] = useState({});
 	const [activeImageIdx, setActiveImageIdx] = useState<number>(-1);
 	const { productId } = useParams();
+	const addItem = useCart()
 
 	/** -------------------------FUNCTIONS------------------------- **/
 
@@ -106,6 +108,7 @@ const ProductPage = (): React.JSX.Element => {
 					<img src='/assets/button_clay.svg' alt='Novo Shop Link' className='w-full h-full' />
 					<button
 						type='button'
+						onClick={addItem(product)}
 						className='absolute w-full h-full text-lg text-nowrap left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-clay '
 						style={{ fontFamily: "cheap-pine-sans, sans-serif", fontStyle: "normal", fontWeight: 400 }}>
 						ADD TO CART
