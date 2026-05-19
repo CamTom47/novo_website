@@ -17,9 +17,9 @@ const HomePage = (): React.JSX.Element => {
 	return (
 		<div className='flex flex-col w-full h-fit'>
 			<div className='flex justify-center gap-x-6 pb-20 [&_img]:h-80 [&_img]:w-auto xl:pb-0 xl:h-content xl:[&_img]:h-100'>
-				<img src='/products/novo-ceramics-product-photos-7.jpg' alt='' />
+				<img src='/products/novo-ceramics-product-photos-7.jpg' alt='' className="hidden xl:inline" />
 				<img src='/products/novo-ceramics-product-photos-55.jpg' alt='' />
-				<img src='/products/novo-ceramics-product-photos-1.jpg' alt='' />
+				<img src='/products/novo-ceramics-product-photos-1.jpg' alt='' className="hidden xl:inline" />
 			</div>
 			<div className='flex justify-center bg-beige'>
 				<div className='flex flex-col px-2 gap-y-12 py-20 text-light-gray xl:px-12 xl:w-1/2'>

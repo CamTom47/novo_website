@@ -20,6 +20,20 @@ button {
 	font-weight: 400;
 }
 
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}
+
+
 @theme {
 	--color-beige: #f2eade;
 	--color-light-gray: #ab9b6a;

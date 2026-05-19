@@ -35,13 +35,13 @@ const ShopPage = (): React.JSX.Element => {
 		const response: any = await SquareApi.findAllProducts();
 		const products = response.data.objects;
 
-		const newProducts = products.map((product) => ({
+		//Map through the products and add the main image from the relatedObjects object as a key/value pair. This helps return consistent image ordering on the shop page
+		const newProducts = products.map((product: ProductData) => ({
 			...product,
 			mainImage: response.data.relatedObjects.find(
-				(relatedObjects) => relatedObjects.id === product.itemData.imageIds[0],
+				(relatedObjects: ProductImage) => relatedObjects.id === product.itemData.imageIds[0],
 			),
 		}));
-		console.log("new roducts", newProducts);
 
 		setProductData(newProducts as ProductData[]);
 	};
@@ -64,7 +64,7 @@ const ShopPage = (): React.JSX.Element => {
 	));
 
 	return (
-		<div className='flex flex-col gap-y-8 mx-2 xl:grid xl:grid-cols-3 xl:gap-x-4 xl:gap-y-4 xl:mx-80'>
+		<div className='flex flex-col gap-y-8 mx-2 mb-12 xl:grid xl:grid-cols-3 xl:gap-x-4 xl:gap-y-4 xl:mx-80'>
 			{productImageComponents}
 		</div>
 	);
