@@ -13,9 +13,10 @@ interface ProductData {
 	itemData: {
 		imageIds: number[];
 	};
+	mainImage: ProductImage;
 }
 interface ProductImage {
-    id: number;
+	id: number;
 	imageData: {
 		url: string;
 	};
@@ -32,8 +33,17 @@ const ShopPage = (): React.JSX.Element => {
 
 	const getAllProducts = async () => {
 		const response: any = await SquareApi.findAllProducts();
-		setProductData(response.data.objects as ProductData[]);
-		setProductImages(response.data.relatedObjects as ProductImage[]);
+		const products = response.data.objects;
+
+		const newProducts = products.map((product) => ({
+			...product,
+			mainImage: response.data.relatedObjects.find(
+				(relatedObjects) => relatedObjects.id === product.itemData.imageIds[0],
+			),
+		}));
+		console.log("new roducts", newProducts);
+
+		setProductData(newProducts as ProductData[]);
 	};
 
 	const handleReroute = (e: React.MouseEvent<HTMLAnchorElement>, image: ProductImage) => {
@@ -47,12 +57,16 @@ const ShopPage = (): React.JSX.Element => {
 		getAllProducts();
 	}, []);
 
-	const productImageComponents = productImages.map((image: ProductImage, idx: number) => (
-		<a onClick={(e) => handleReroute(e, image)} key={idx} target='#'>
-			<img src={image.imageData.url} alt='' />
+	const productImageComponents = productData.map((product: ProductData, idx: number) => (
+		<a onClick={(e) => handleReroute(e, product.mainImage)} key={idx} target='#'>
+			<img src={product.mainImage.imageData.url} alt='' />
 		</a>
 	));
 
-	return <div className='flex flex-col gap-y-2 mx-2'>{productImageComponents}</div>;
+	return (
+		<div className='flex flex-col gap-y-8 mx-2 xl:grid xl:grid-cols-3 xl:gap-x-4 xl:gap-y-4 xl:mx-80'>
+			{productImageComponents}
+		</div>
+	);
 };
 export default ShopPage;

@@ -127,7 +127,7 @@ const ProductPage = (): React.JSX.Element => {
 								)
 								.join("")}
 						</p>
-						<p>{product.object.itemData.description}</p>
+						<p className="whitespace-pre-wrap">{product.object.itemData.description}</p>
 					</div>
 				</div>
 				<a href='/shop' className='relative h-10'>
