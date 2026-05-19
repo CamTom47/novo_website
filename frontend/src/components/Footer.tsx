@@ -16,9 +16,12 @@ const Footer = (): React.JSX.Element => {
 	/** -------------------------EFFECTS------------------------- **/
 
 	return (
-		<div className='text-center flex flex-col py-6 w-full bg-light-gray text-beige xl:px-24 xl:py-32 xl:flex-row'>
+		<div className='text-center flex flex-col py-6 w-full bg-light-gray text-beige xl:px-24 xl:py-16 xl:flex-row'>
 			<div className='w-full py-6 px-4 grid grid-cols-2 gap-y-12 xl:gap-x-12 xl:items-center'>
-				<div className='col-span-1 flex flex-col gap-y-2 text-start text-xs'>
+				<div className='col-span-1 flex flex-col gap-y-2 text-start text-xs xl:grid xl:grid-cols-3 xl:[&_a]:text-lg'>
+					<a href='/' className='row-span-3'>
+						<img src='/assets/logo_footer.png' alt='Novo Logo In Footer' className='h-20 w-auto' />
+					</a>
 					<Link to={"/shop"}>Shop</Link>
 					<Link to={"/about"}>About</Link>
 					<Link to={"/gallery"}>Gallery</Link>
@@ -27,7 +30,7 @@ const Footer = (): React.JSX.Element => {
 					<Link to={"/faq"}>FAQ</Link>
 				</div>
 				<div className='flex flex-col col-span-1 justify-self-end w-full items-end gap-y-6'>
-					<a href='/'>
+					<a href='/' className='xl:hidden'>
 						<img src='/assets/logo_footer.png' alt='Novo Logo In Footer' className='h-20 w-auto' />
 					</a>
 					<Link to={"https://www.instagram.com/made.by.novo"} className='col-span-1 justify-self-center'>
