@@ -33,12 +33,13 @@ export function CartProvider({ children }: CartProviderProps) {
 	const [items, setItems] = useState<[]>([]);
 	const [totalQnty, setTotalQnty] = useState<Number>(0);
 
+	//TODO instantiate cart from local host if avaiable
+
 	const addItem = useCallback((product: ProductData) => {
-        console.log(product)
 		setItems((currentItems) => {
 			//TODO update this if Frankie would like the ability to add more than one item to a cart at a time
 			// const existing = currentItems.find( i => i.id === product.id)
-			return [...currentItems, { product, qty: 1 }];
+			return [...currentItems, { product, qnty: 1 }];
 		});
 	}, []);
 
@@ -53,7 +54,7 @@ export function CartProvider({ children }: CartProviderProps) {
 		setTotalQnty(() => {
 			let count = 0;
 			items.map((i: any) => {
-				count += i.qty;
+				count += i.qnty;
 			});
 
 			return count;
@@ -74,9 +75,9 @@ export function CartProvider({ children }: CartProviderProps) {
 }
 
 export function useCart() {
-    const context = useContext(CartContext);
-    if(!context){
-        throw new Error('useCart must be used within a CartProvider');
-    }
-	return context
+	const context = useContext(CartContext);
+	if (!context) {
+		throw new Error("useCart must be used within a CartProvider");
+	}
+	return context;
 }
