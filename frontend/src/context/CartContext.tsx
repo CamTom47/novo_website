@@ -1,5 +1,5 @@
 /** -------------------------MODULES------------------------- **/
-import React, { createContext, useCallback, useEffect, useState, useContext } from "react";
+import { createContext, useCallback, useEffect, useState, useContext } from "react";
 import type { ReactNode } from "react";
 
 interface ProductData {
@@ -19,13 +19,22 @@ interface ProductImage {
 interface CartProviderProps {
 	children: ReactNode;
 }
-export const CartContext = createContext(null);
+
+interface CartContext {
+	items: [];
+	addItem: (product: ProductData) => void;
+	removeItem: (id: String) => void;
+	totalQnty: Number;
+}
+
+export const CartContext = createContext<CartContext | null>(null);
 
 export function CartProvider({ children }: CartProviderProps) {
 	const [items, setItems] = useState<[]>([]);
 	const [totalQnty, setTotalQnty] = useState<Number>(0);
 
 	const addItem = useCallback((product: ProductData) => {
+        console.log(product)
 		setItems((currentItems) => {
 			//TODO update this if Frankie would like the ability to add more than one item to a cart at a time
 			// const existing = currentItems.find( i => i.id === product.id)
@@ -44,7 +53,7 @@ export function CartProvider({ children }: CartProviderProps) {
 		setTotalQnty(() => {
 			let count = 0;
 			items.map((i: any) => {
-				count += i.qnty;
+				count += i.qty;
 			});
 
 			return count;
@@ -65,5 +74,9 @@ export function CartProvider({ children }: CartProviderProps) {
 }
 
 export function useCart() {
-	return useContext(CartContext);
+    const context = useContext(CartContext);
+    if(!context){
+        throw new Error('useCart must be used within a CartProvider');
+    }
+	return context
 }

@@ -10,15 +10,28 @@ import { useCart } from "../context/CartContext";
 /** -------------------------STYLES------------------------- **/
 
 /** -------------------------INTERFACES------------------------- **/
+interface ProductData {
+	id: String;
+	itemData: {
+		imageIds: number[];
+	};
+	mainImage: ProductImage;
+}
+interface ProductImage {
+	id: number;
+	imageData: {
+		url: string;
+	};
+}
 
 const ProductPage = (): React.JSX.Element => {
 	/** -------------------------STATE------------------------- **/
 	const [isLoading, setIsLoading] = useState(true);
-	const [product, setProduct] = useState({});
+	const [product, setProduct] = useState<ProductData | null>(null);
 	const [activeImage, setActiveImage] = useState({});
 	const [activeImageIdx, setActiveImageIdx] = useState<number>(-1);
 	const { productId } = useParams();
-	const addItem = useCart()
+	const { addItem } = useCart();
 
 	/** -------------------------FUNCTIONS------------------------- **/
 
@@ -39,7 +52,7 @@ const ProductPage = (): React.JSX.Element => {
 	}, []);
 
 	useEffect(() => {
-		if (Object.keys(product).length > 0) {
+		if (product !== null) {
 			setActiveImage(
 				product.relatedObjects.find((relatedObject) => relatedObject.id === product.object.itemData.imageIds[0]),
 			);
@@ -51,16 +64,22 @@ const ProductPage = (): React.JSX.Element => {
 	}, [product]);
 
 	const selectNextPhoto = () => {
-		if (Object.keys(product).length > 0 && activeImageIdx === 0) setActiveImageIdx(product.relatedObjects.length - 1);
+		if (product !== null && activeImageIdx === 0) setActiveImageIdx(product.relatedObjects.length - 1);
 		else {
 			setActiveImageIdx((oldState) => (oldState -= 1));
 		}
 	};
 
 	const selectPreviousPhoto = () => {
-		if (Object.keys(product).length > 0 && activeImageIdx === product.relatedObjects.length - 1) setActiveImageIdx(0);
+		if (product !== null && activeImageIdx === product.relatedObjects.length - 1) setActiveImageIdx(0);
 		else {
 			setActiveImageIdx((oldState) => (oldState += 1));
+		}
+	};
+
+	const addToCart = () => {
+		if (product !== null) {
+			addItem(product);
 		}
 	};
 
@@ -81,9 +100,9 @@ const ProductPage = (): React.JSX.Element => {
 							<img key={idx} src={image.imageData.url} onClick={() => setActiveImageIdx(idx)} className='h-24 w-auto' />
 						))}
 					</div>
-					<a href="/shop" className='flex gap-x-2 items-center'>
+					<a href='/shop' className='flex gap-x-2 items-center'>
 						<img src='/back-arrow.svg' alt='' className='size-6' />
-						<p className="text-sm xl:text-xs font-bold">Back to Shop</p>
+						<p className='text-sm xl:text-xs font-bold'>Back to Shop</p>
 					</a>
 				</div>
 			</div>
@@ -104,16 +123,16 @@ const ProductPage = (): React.JSX.Element => {
 					</p>
 					<p className='whitespace-pre-wrap'>{product.object.itemData.description}</p>
 				</div>
-				<a href='/shop' className='relative h-10 xl:place-self-start'>
+				<div className='relative h-10 xl:place-self-start'>
 					<img src='/assets/button_clay.svg' alt='Novo Shop Link' className='w-full h-full' />
 					<button
 						type='button'
-						onClick={addItem(product)}
+						onClick={addToCart}
 						className='absolute w-full h-full text-lg text-nowrap left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-clay '
 						style={{ fontFamily: "cheap-pine-sans, sans-serif", fontStyle: "normal", fontWeight: 400 }}>
 						ADD TO CART
 					</button>
-				</a>
+				</div>
 			</div>
 		</div>
 	);
