@@ -44,6 +44,15 @@ class SquareApi {
 			return err;
 		}
 	};
+	static startAnOrder = async (data) => {
+		try {
+			const response = await this.request("orders", data, "post");
+			return response;
+		} catch (err) {
+			console.error(err);
+			return err;
+		}
+	};
 }
 
 export default SquareApi;

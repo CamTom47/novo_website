@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import SquareApi from "../api/SquareApi";
 import ImageToggler from "../components/ImageToggler";
 import { useCart } from "../context/CartContext";
+import {Link} from 'react-router-dom'
 
 /** -------------------------COMPONENTS------------------------- **/
 
@@ -100,10 +101,10 @@ const ProductPage = (): React.JSX.Element => {
 							<img key={idx} src={image.imageData.url} onClick={() => setActiveImageIdx(idx)} className='h-24 w-auto' />
 						))}
 					</div>
-					<a href='/shop' className='flex gap-x-2 items-center'>
+					<Link to='/shop' className='flex gap-x-2 items-center'>
 						<img src='/back-arrow.svg' alt='' className='size-6' />
 						<p className='text-sm xl:text-xs font-bold'>Back to Shop</p>
-					</a>
+					</Link>
 				</div>
 			</div>
 

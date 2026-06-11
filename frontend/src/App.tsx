@@ -14,6 +14,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import Footer from "./components/Footer";
 import ProductPage from "./pages/ProductPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import CartPage from "./pages/CartPage";
 import PaymentPage from "./pages/PaymentPage";
 
 /** -------------------------STYLES------------------------- **/
@@ -35,6 +36,7 @@ const App = (): React.JSX.Element => {
 					<Route path='/' element={<HomePage />} />
 					<Route path='/shop' element={<ShopPage />} />
 					<Route path='/shop/:productId' element={<ProductPage />} />
+					<Route path='/cart' element={<CartPage />} />
 					<Route path='/about' element={<AboutPage />} />
 					<Route path='/gallery' element={<GalleryPage />} />
 					<Route path='/checkout' element={<CheckoutPage />} />
