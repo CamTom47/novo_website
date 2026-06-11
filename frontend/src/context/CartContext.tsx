@@ -21,16 +21,20 @@ interface CartProviderProps {
 }
 
 interface CartContext {
-	items: [] | null;
+	items: CartItem;
 	addItem: (product: ProductData) => void;
 	removeItem: (id: String) => void;
 	totalQnty: Number;
+}
+interface CartItem {
+	product: ProductData;
+	qnty: number;
 }
 
 export const CartContext = createContext<CartContext | null>(null);
 
 export function CartProvider({ children }: CartProviderProps) {
-	const [items, setItems] = useState<[]>([]);
+	const [items, setItems] = useState<CartItem[]>([]);
 	const [totalQnty, setTotalQnty] = useState<Number>(0);
 
 	//TODO instantiate cart from local host if avaiable
@@ -43,22 +47,22 @@ export function CartProvider({ children }: CartProviderProps) {
 			localStorage.setItem("cart", JSON.stringify(updated));
 			return updated;
 		});
-	}, []);
+	}, [items]);
 
 	const removeItem = useCallback((id: String) => {
-		const cartData = items.filter((item: ProductData) => item.product.object.id !== id);
-		setItems((currentItems) => {
-			return [...cartData];
-		});
+		const cartData = items.filter((item) => item.product.object.id !== id);
+		setItems(cartData);
 		if (items.length === 0) localStorage.clear();
 		else localStorage.setItem("cart", JSON.stringify(cartData));
-	}, []);
+	}, [items]);
 
 	useEffect(() => {
-		const cartData = localStorage.getItem("cart");
-		console.log("cart data", JSON.parse(cartData));
-		if (cartData && JSON.parse(cartData).length > 0) {
-			setItems(JSON.parse(cartData));
+		if (items.length === 0) {
+			const cartData = localStorage.getItem("cart");
+			if (cartData && JSON.parse(cartData).length > 0) {
+				const parsedData = JSON.parse(cartData);
+				setItems((oldState) => [...parsedData]);
+			}
 		}
 	}, []);
 
