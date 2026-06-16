@@ -47,7 +47,7 @@ const Navbar = (): React.JSX.Element => {
 				/>
 			</a>
 			<div
-				className={`absolute z-999 top-32 h-fit bg-white w-full flex flex-col items-center gap-x-6 font-light text-light-gray justify-center duration-300 ${!isNavOpen ? "opacity-0 xl:opacity-100" : "opacity-100"} [&_a]:h-fit [&_a]:py-4 [&_a]:w-full [&_a]:flex [&_a]:px-4 xl:gap-x-8 xl:relative xl:w-1/4 xl:grid xl:grid-cols-4 xl:[&_a]:col-span-1 xl:[&_a]:place-self-center xl:top-0 xl:[&_a]:justify-center xl:[&_a]:w-fit`}>
+				className={`absolute z-999 top-32 h-fit bg-white w-full flex flex-col items-center gap-x-6 font-light text-light-gray justify-center duration-300 ${!isNavOpen ? "opacity-0 xl:opacity-100" : "opacity-100"} [&_a]:h-fit [&_a]:py-4 [&_a]:w-full [&_a]:flex [&_a]:px-4 xl:gap-x-8 xl:relative xl:w-1/4 xl:grid xl:grid-cols-4 xl:[&_a]:col-span-1 xl:[&_a]:place-self-center xl:top-0 xl:[&_a]:justify-center xl:[&_a]:w-fit ${isNavOpen ? "" : "hidden"}`}>
 				<NavLink
 					onClick={toggleIsNavOpen}
 					to={"/shop"}

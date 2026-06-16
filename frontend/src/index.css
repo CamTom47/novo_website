@@ -21,18 +21,24 @@ button {
 }
 
 @layer utilities {
-  /* Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
+	/* Chrome, Safari and Opera */
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
 
-  /* IE, Edge and Firefox */
-  .no-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+	/* IE, Edge and Firefox */
+	.no-scrollbar {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+
+	.truncate-multiline {
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 3; /* Change this number to the number of lines you want */
+		overflow: hidden;
+	}
 }
-
 
 @theme {
 	--color-beige: #f2eade;
@@ -44,7 +50,7 @@ button {
 	--animate-top-span-close: top-span-close 1s ease-in-out;
 	--animate-bottom-span-open: bottom-span-open 1s ease-in-out;
 	--animate-bottom-span-close: bottom-span-close 1s ease-in-out;
-	--height-content: calc(100vh - 280px);
+	--height-content: calc(100vh - 176px);
 }
 
 @keyframes top-span-open {
@@ -78,4 +84,3 @@ button {
 		transform: rotate(-45deg);
 	}
 }
-
