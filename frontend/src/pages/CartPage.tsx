@@ -39,20 +39,22 @@ const CartPage = (): React.JSX.Element => {
 	}, [items]);
 
 	return (
-		<div>
-			<div className='grid grid-cols-1 w-full h-content justify-between xl:hidden '>
-				<div className='overflow-y-scroll w-full pb-14 px-4 no-scrollbar'>
-					<div className='w-full gap-y-4 flex flex-col'>
+		<div className="h-content-mobile xl:h-content-laptop">
+			<div className='grid grid-cols-1 w-full h-full justify-between bg-beige overflow-y-scroll no-scrollbar xl:hidden'>
+				<div className=' w-full '>
+					<div className='w-full gap-y-2 flex py-4 flex-col'>
 						{items.map((item, idx) => (
 							<CartCard item={item} idx={idx} />
 						))}
 					</div>
 				</div>
-				<div className='flex flex-col items-center justify-center bg-beige py-4 gap-y-4'>
-					<div className='flex gap-x-4'>
-						<p className='text-lg'>Cart Total</p>
-						<p>${cartTotal.toFixed(2)}</p>
+				{/* Checkout Summary */}
+				<div className='flex items-center justify-between bg-white py-4 px-4 gap-y-4 sticky w-full bottom-0 border-t border-clay'>
+					<div className='flex flex-col gap-x-4'>
+						<p className='text-lg font-bold text-clay'>Subtotal</p>
+						<p className='font-bold text-xl'>${cartTotal.toFixed(2)}</p>
 					</div>
+
 					<div className='relative h-10 xl:place-self-start'>
 						<img src='/assets/button_clay.svg' alt='Novo Shop Link' className='w-full h-full' />
 						<Link
@@ -65,7 +67,7 @@ const CartPage = (): React.JSX.Element => {
 				</div>
 			</div>
 			{/* Laptop breakpoint */}
-			<div className='hidden w-full h-content justify-between xl:grid xl:grid-cols-2 xl:px-100 xl:py-24'>
+			<div className='bg-beige hidden w-full h-full justify-between xl:grid xl:grid-cols-2 gap-x-12 xl:px-100 xl:py-4'>
 				<div className='overflow-y-scroll w-full pb-14 px-4 no-scrollbar'>
 					<div className='w-full gap-y-4 flex flex-col'>
 						{items.map((item, idx) => (
@@ -73,9 +75,9 @@ const CartPage = (): React.JSX.Element => {
 						))}
 					</div>
 				</div>
-				<div className='flex flex-col items-center justify-center bg-beige py-4 gap-y-4'>
+				<div className='flex flex-col items-center justify-center bg-white py-4 gap-y-4 h-1/2 rounded-sm'>
 					<div className='flex gap-x-4'>
-						<p className='text-lg'>Cart Total</p>
+						<p className='text-lg'>Subtotal</p>
 						<p>${cartTotal.toFixed(2)}</p>
 					</div>
 					<div className='relative h-10 xl:place-self-start'>

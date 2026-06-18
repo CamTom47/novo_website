@@ -50,7 +50,8 @@ button {
 	--animate-top-span-close: top-span-close 1s ease-in-out;
 	--animate-bottom-span-open: bottom-span-open 1s ease-in-out;
 	--animate-bottom-span-close: bottom-span-close 1s ease-in-out;
-	--height-content: calc(100vh - 176px);
+	--height-content-mobile: calc(100vh - 176px);
+	--height-content-laptop: calc(100dvh - 228px);
 }
 
 @keyframes top-span-open {
