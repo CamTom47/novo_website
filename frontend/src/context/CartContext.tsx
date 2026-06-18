@@ -21,10 +21,11 @@ interface CartProviderProps {
 }
 
 interface CartContext {
-	items: CartItem;
+	items: CartItem[];
 	addItem: (product: ProductData) => void;
 	removeItem: (id: String) => void;
-	totalQnty: Number;
+	totalQnty: number;
+	cartTotal: number;
 }
 interface CartItem {
 	product: ProductData;
@@ -35,7 +36,8 @@ export const CartContext = createContext<CartContext | null>(null);
 
 export function CartProvider({ children }: CartProviderProps) {
 	const [items, setItems] = useState<CartItem[]>([]);
-	const [totalQnty, setTotalQnty] = useState<Number>(0);
+	const [totalQnty, setTotalQnty] = useState<number>(0);
+	const [cartTotal, setCartTotal] = useState<number>(0);
 
 	//TODO instantiate cart from local host if avaiable
 
@@ -77,6 +79,21 @@ export function CartProvider({ children }: CartProviderProps) {
 		});
 	}, [items]);
 
+	useEffect(() => {
+			let total = 0;
+			for (let item of items) {
+				let cost = item.product.object.itemData.variations[0].itemVariationData.priceMoney.amount;
+				let decimalString = Number.parseFloat(
+					cost
+						.split("")
+						.toSpliced(cost.split("").length - 2, 0, ".")
+						.join(""),
+				).toFixed(2);
+				total += Number(decimalString);
+			}
+			setCartTotal(total);
+		}, [items]);
+
 	return (
 		<CartContext.Provider
 			value={{
@@ -84,6 +101,7 @@ export function CartProvider({ children }: CartProviderProps) {
 				addItem,
 				removeItem,
 				totalQnty,
+				cartTotal,
 			}}>
 			{children}
 		</CartContext.Provider>
