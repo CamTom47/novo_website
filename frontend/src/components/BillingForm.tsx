@@ -14,8 +14,11 @@ interface Inputs {
 /** -------------------------STYLES------------------------- **/
 
 /** -------------------------INTERFACES------------------------- **/
+interface BillingFormProps {
+	isCollectingFormData: boolean;
+}
 
-const BillingForm = (): React.JSX.Element => {
+const BillingForm = ({ isCollectingFormData }: BillingFormProps): React.JSX.Element => {
 	/** -------------------------STATE------------------------- **/
 
 	/** -------------------------FUNCTIONS------------------------- **/
@@ -47,7 +50,7 @@ const BillingForm = (): React.JSX.Element => {
 				</div>
 			</div>
 			{!getValues("matchShipping") && (
-				<div className="grid grid-cols-2 gap-x-12 gap-y-8 h-fit w-full col-span-2">
+				<div className='grid grid-cols-2 gap-x-12 gap-y-8 h-fit w-full col-span-2'>
 					<Field label={"First Name"} error={errors.firstName} cols={1}>
 						<input {...register("firstName", { required: true })} type='text' />
 					</Field>

@@ -14,8 +14,11 @@ interface Inputs {
 /** -------------------------STYLES------------------------- **/
 
 /** -------------------------INTERFACES------------------------- **/
+interface ShippingFormProps {
+	isCollectingFormData: boolean;
+}
 
-const ShippingForm = (): React.JSX.Element => {
+const ShippingForm = ({isCollectingFormData}: ShippingFormProps): React.JSX.Element => {
 	/** -------------------------STATE------------------------- **/
 
 	/** -------------------------FUNCTIONS------------------------- **/

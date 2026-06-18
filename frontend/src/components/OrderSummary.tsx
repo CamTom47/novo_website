@@ -41,17 +41,15 @@ const OrderSummary = (): React.JSX.Element => {
 					<p>$1,000</p>
 				</div>
 			</div>
-			{location.pathname === "/cart" && (
-				<div className='relative h-10 px-4 place-self-center '>
-					<img src='/assets/button_clay.svg' alt='Novo Shop Link' className='w-full h-full' />
-					<Link
-						to='/checkout'
-						className='absolute flex items-center justify-center w-full h-full text-lg top-0 left-0 text-nowrap text-clay '
-						style={{ fontFamily: "cheap-pine-sans, sans-serif", fontStyle: "normal", fontWeight: 400 }}>
-						CHECKOUT
-					</Link>
-				</div>
-			)}
+			{location.pathname === '/cart' && <div className='relative h-10 px-4 place-self-center '>
+				<img src='/assets/button_clay.svg' alt='Novo Shop Link' className='w-full h-full' />
+				<Link
+					to='/checkout'
+					className='absolute flex items-center justify-center w-full h-full text-lg top-0 left-0 text-nowrap text-clay '
+					style={{ fontFamily: "cheap-pine-sans, sans-serif", fontStyle: "normal", fontWeight: 400 }}>
+					CHECKOUT
+				</Link>
+			</div>}
 		</div>
 	);
 };
