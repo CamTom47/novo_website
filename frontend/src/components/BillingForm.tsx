@@ -1,13 +1,8 @@
 /** -------------------------MODULES------------------------- **/
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
 import Field from "./Field";
-
-interface Inputs {
-	example: string;
-	exampleRequired: string;
-}
 
 /** -------------------------COMPONENTS------------------------- **/
 
@@ -16,9 +11,23 @@ interface Inputs {
 /** -------------------------INTERFACES------------------------- **/
 interface BillingFormProps {
 	isCollectingFormData: boolean;
+	collectData: (data: FormData) => void;
 }
 
-const BillingForm = ({ isCollectingFormData }: BillingFormProps): React.JSX.Element => {
+interface FormData {
+	matchShipping: boolean;
+	firstName: string;
+	lastName: string;
+	phoneNumber: string;
+	email: string;
+	street: string;
+	city: string;
+	state: string;
+	zipCode: string;
+	country: string;
+}
+
+const BillingForm = ({ isCollectingFormData, collectData }: BillingFormProps): React.JSX.Element => {
 	/** -------------------------STATE------------------------- **/
 
 	/** -------------------------FUNCTIONS------------------------- **/
@@ -28,13 +37,24 @@ const BillingForm = ({ isCollectingFormData }: BillingFormProps): React.JSX.Elem
 		watch,
 		getValues,
 		formState: { errors },
-	} = useForm({
+	} = useForm<FormData>({
 		defaultValues: {
 			matchShipping: true,
 		},
 	});
 
-	const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+	const onSubmit: SubmitHandler<FormData> = useCallback(
+		(data: FormData) => {
+			collectData(data);
+		},
+		[collectData],
+	);
+
+	/** -------------------------EFFECTS------------------------- **/
+
+	useEffect(() => {
+		if (isCollectingFormData) handleSubmit(onSubmit, (errors) => console.log("what", errors))();
+	}, [isCollectingFormData, handleSubmit, onSubmit]);
 
 	watch("matchShipping");
 
@@ -58,25 +78,25 @@ const BillingForm = ({ isCollectingFormData }: BillingFormProps): React.JSX.Elem
 						<input {...register("lastName", { required: true })} type='text' />
 					</Field>
 					<Field label={"Phone Number"} error={errors.phoneNumber}>
-						<input type='text' name='phoneNumber' />
+						<input {...register("phoneNumber", { required: true })} type='text' name='phoneNumber' />
 					</Field>
 					<Field label={"Email"} error={errors.email}>
-						<input type='text' name='email' />
+						<input {...register("email", { required: true })} type='text' name='email' />
 					</Field>
 					<Field label={"Street"} error={errors.street}>
 						<input {...register("street", { required: true })} type='text' />
 					</Field>
 					<Field label={"City"} error={errors.city} cols={1}>
-						<input type='text' name='city' />
+						<input {...register("city", { required: true })} type='text' name='city' />
 					</Field>
 					<Field label={"State"} error={errors.state} cols={1}>
-						<input type='text' />
+						<input {...register("state", { required: true })} type='text' name='state' />
 					</Field>
 					<Field label={"Zip Code"} error={errors.zipCode} cols={1}>
-						<input type='text' name='zipNumber' />
+						<input {...register("zipCode", { required: true })} type='text' name='zipCode' />
 					</Field>
 					<Field label={"Country"} error={errors.country} cols={1}>
-						<input type='text' name='country' />
+						<input {...register("country", { required: true })} type='text' name='country' />
 					</Field>
 				</div>
 			)}

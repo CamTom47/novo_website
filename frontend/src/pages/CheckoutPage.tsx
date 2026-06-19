@@ -19,18 +19,25 @@ const CheckoutPage = (): React.JSX.Element => {
 
 	const handleSubmit = () => {
 		setIsCollectingFormData(true);
-	}
+		setTimeout(() => {
+			setIsCollectingFormData(false);
+		}, 2000);
+	};
+
+	const collectData = (formData) => {
+		console.log("form data", formData);
+	};
 
 	/** -------------------------EFFECTS------------------------- **/
 
 	return (
 		<div className='grid grid-cols-2 gap-x-12 items-start bg-beige w-full xl:px-100 xl:py-12 xl:h-fit'>
 			<div className='flex flex-col gap-y-12'>
-				<ShippingForm isCollectingFormData={isCollectingFormData}></ShippingForm>
-				<BillingForm isCollectingFormData={isCollectingFormData}></BillingForm>
+				<ShippingForm collectData={collectData} isCollectingFormData={isCollectingFormData}></ShippingForm>
+				<BillingForm collectData={collectData} isCollectingFormData={isCollectingFormData}></BillingForm>
 			</div>
 			<OrderSummary></OrderSummary>
-			<button className='relative h-10 mt-12 place-self-start' onClick={() => console.log('submitting order')}>
+			<button className='relative h-10 mt-12 place-self-start' onClick={handleSubmit}>
 				<img src='/assets/button_clay.svg' alt='Novo Shop Link' className='w-full h-full' />
 				<p
 					className='absolute flex items-center justify-center w-full h-full text-lg top-0 left-0 text-nowrap text-clay '
